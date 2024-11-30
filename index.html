@@ -3,33 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Singleton Design Pattern</title>
+  <title>ER Diagram</title>
   <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
   <script>
     mermaid.initialize({ startOnLoad: true });
   </script>
 </head>
 <body>
-  <h1>Hospital Management System - Singleton Pattern</h1>
+  <h1>Relational Database Design - ER Diagram</h1>
   <div class="mermaid">
-    classDiagram
-      class EHRManager {
-        -instance: EHRManager
-        +getInstance()
-        +getPatientRecords()
-        +savePatientRecords()
+    erDiagram
+      PATIENTS {
+        string PatientID
+        string Name
+        string Address
+        string PhoneNumber
+        string InsuranceInfo
+      }
+      APPOINTMENTS {
+        string AppointmentID
+        date AppointmentDate
+        string Time
+        string DoctorID
+        string PatientID
+      }
+      MEDICALRECORDS {
+        string RecordID
+        string PatientID
+        string Diagnosis
+        string TreatmentPlan
+        string TestResults
+      }
+      BILLING {
+        string InvoiceID
+        string AppointmentID
+        float TotalAmount
+        string PaymentStatus
+      }
+      USERS {
+        string UserID
+        string Role
+        string Username
+        string PasswordHash
       }
 
-      class AppointmentModule {
-        +getAppointments()
-      }
-      class BillingModule {
-        +generateInvoice()
-      }
-
-      %% Singleton Usage
-      EHRManager <--> AppointmentModule : provides EHR access
-      EHRManager <--> BillingModule : shares patient records
-    </div>
+      %% Relationships
+      PATIENTS ||--o{ APPOINTMENTS : "has"
+      APPOINTMENTS ||--o{ MEDICALRECORDS : "includes"
+      APPOINTMENTS ||--|| BILLING : "generates"
+      USERS ||--o{ APPOINTMENTS : "accesses"
+  </div>
 </body>
 </html>
+
