@@ -3,44 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HMS UI Mockup</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Integration Flow Diagram</title>
+    <script type="module" src="https://unpkg.com/mermaid@10/dist/mermaid.esm.min.mjs"></script>
 </head>
 <body>
-    <header>
-        <h1>Hospital Management System Dashboard</h1>
-    </header>
-    <main>
-        <section id="doctor-dashboard">
-            <h2>Doctor's Dashboard</h2>
-            <ul>
-                <li>View Patient Records</li>
-                <li>Order Lab Tests</li>
-                <li>Access Radiology Reports</li>
-            </ul>
-        </section>
-        <section id="nurse-dashboard">
-            <h2>Nurse's Dashboard</h2>
-            <ul>
-                <li>Monitor Vitals</li>
-                <li>Track Medications</li>
-                <li>Update Treatment Plans</li>
-            </ul>
-        </section>
-        <section id="admin-dashboard">
-            <h2>Administrative Staff Dashboard</h2>
-            <ul>
-                <li>Schedule Appointments</li>
-                <li>Manage Billing</li>
-                <li>View Inventory</li>
-            </ul>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2024 CityCare Hospital HMS</p>
-    </footer>
+    <h1>Integration Flow Diagram</h1>
+    <div class="mermaid">
+        graph TD
+        A[HMS Core System] --> B[Laboratory Information System]
+        A --> C[Radiology Information System]
+        A --> D[Pharmacy Management System]
+        B --> E[Lab Test Results]
+        C --> F[Imaging Reports]
+        D --> G[Inventory Updates]
+        G --> A[Data Sync]
+        E --> A[Results Imported]
+        F --> A[Reports Imported]
+    </div>
 </body>
 </html>
-
-
 
