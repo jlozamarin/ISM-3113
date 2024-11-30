@@ -3,40 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MVC Design Pattern</title>
+  <title>Singleton Design Pattern</title>
   <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
   <script>
     mermaid.initialize({ startOnLoad: true });
   </script>
 </head>
 <body>
-  <h1>Hospital Management System - MVC Pattern</h1>
+  <h1>Hospital Management System - Singleton Pattern</h1>
   <div class="mermaid">
     classDiagram
-      %% MVC Components
-      class Model {
-        +PatientData
-        +AppointmentData
-        +MedicalRecord
-        +updateData()
-      }
-      class View {
-        +RenderUI()
-        +DisplayEHR()
-        +ShowAppointments()
-      }
-      class Controller {
-        +handleInput()
-        +updateModel()
-        +refreshView()
+      class EHRManager {
+        -instance: EHRManager
+        +getInstance()
+        +getPatientRecords()
+        +savePatientRecords()
       }
 
-      %% Relationships
-      Model <--> Controller : communicates
-      View <--> Controller : interacts
-      View --> Model : observes
-  </div>
+      class AppointmentModule {
+        +getAppointments()
+      }
+      class BillingModule {
+        +generateInvoice()
+      }
+
+      %% Singleton Usage
+      EHRManager <--> AppointmentModule : provides EHR access
+      EHRManager <--> BillingModule : shares patient records
+    </div>
 </body>
 </html>
-
-
