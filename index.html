@@ -3,33 +3,57 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Use Case Diagram - Actors Only</title>
+  <title>Class Diagram</title>
   <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
   <script>
     mermaid.initialize({ startOnLoad: true });
   </script>
 </head>
 <body>
-  <h1>Hospital Management System - Use Case Diagram</h1>
+  <h1>Hospital Management System - Class Diagram</h1>
   <div class="mermaid">
-    graph TB
-      %% Actors
-      Doctors[Doctors]
-      Surgeons[Surgeons]
-      Nurses[Nurses]
-      AdminStaff[Administrative Staff]
-      Pharmacy[Pharmacy Staff]
+    classDiagram
+      %% Define Classes
+      class Patient {
+        +PatientID: String
+        +Name: String
+        +Address: String
+        +PhoneNumber: String
+        +InsuranceInfo: String
+        +getMedicalHistory()
+        +updateDetails()
+      }
+      class Appointment {
+        +AppointmentID: String
+        +Date: Date
+        +Time: String
+        +DoctorAssigned: String
+        +scheduleAppointment()
+        +cancelAppointment()
+      }
+      class MedicalRecord {
+        +RecordID: String
+        +Diagnosis: String
+        +TreatmentPlan: String
+        +TestResults: String
+        +viewRecord()
+        +updateRecord()
+      }
+      class Billing {
+        +InvoiceID: String
+        +TotalAmount: Float
+        +PaymentStatus: String
+        +generateInvoice()
+        +processPayment()
+      }
 
-      %% Hospital Management System
-      HMS[Hospital Management System]
-
-      %% Connections
-      Doctors --> HMS
-      Surgeons --> HMS
-      Nurses --> HMS
-      AdminStaff --> HMS
-      Pharmacy --> HMS
+      %% Define Relationships
+      Patient "1" --> "0..*" Appointment : "has"
+      Patient "1" --> "0..*" MedicalRecord : "has"
+      Appointment "1" --> "1" Billing : "linked to"
+      Appointment "1" --> "1" Patient : "for"
   </div>
 </body>
 </html>
+
 
