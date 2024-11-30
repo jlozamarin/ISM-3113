@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Use Case Diagram</title>
+  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+</head>
+<body>
+  <h1>Hospital Management System - Use Case Diagram</h1>
+  <div class="mermaid">
+    graph TB
+      %% Actors
+      Doctors[Doctors]
+      Surgeons[Surgeons]
+      Nurses[Nurses]
+      AdminStaff[Administrative Staff]
+      Pharmacy[Pharmacy Staff]
+
+      %% Hospital Management System
+      HMS[Hospital Management System]
+
+      %% Use Cases
+      PatientRegistration[Patient Registration]
+      AppointmentScheduling[Appointment Scheduling]
+      AccessEHR[Access EHR]
+      Billing[Billing and Invoice Generation]
+      InventoryManagement[Inventory Management]
+
+      %% Connections
+      Doctors -->|Access EHR| HMS
+      Surgeons -->|Access EHR| HMS
+      Nurses -->|Access EHR| HMS
+      Nurses -->|Appointment Scheduling| HMS
+      AdminStaff -->|Patient Registration| HMS
+      AdminStaff -->|Appointment Scheduling| HMS
+      AdminStaff -->|Billing| HMS
+      Pharmacy -->|Inventory Management| HMS
+  </div>
+</body>
+</html>
