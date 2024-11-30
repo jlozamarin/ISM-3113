@@ -3,39 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sequence Diagram</title>
+  <title>MVC Design Pattern</title>
   <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
   <script>
     mermaid.initialize({ startOnLoad: true });
   </script>
 </head>
 <body>
-  <h1>Hospital Management System - Sequence Diagram</h1>
+  <h1>Hospital Management System - MVC Pattern</h1>
   <div class="mermaid">
-    sequenceDiagram
-      participant Patient
-      participant AdminStaff
-      participant HMS
-      participant Doctor
-      participant Billing
+    classDiagram
+      %% MVC Components
+      class Model {
+        +PatientData
+        +AppointmentData
+        +MedicalRecord
+        +updateData()
+      }
+      class View {
+        +RenderUI()
+        +DisplayEHR()
+        +ShowAppointments()
+      }
+      class Controller {
+        +handleInput()
+        +updateModel()
+        +refreshView()
+      }
 
-      %% Patient Admission
-      Patient->>AdminStaff: Provide personal and insurance details
-      AdminStaff->>HMS: Enter details into Patient Registration
-      HMS->>AdminStaff: Confirm registration
-
-      %% Medical Record Updates
-      Patient->>Doctor: Provide medical issue details
-      Doctor->>HMS: Update Medical Records with diagnosis and treatment plan
-      HMS->>Doctor: Save confirmation
-      HMS->>Billing: Notify billing of treatment costs
-
-      %% Billing Process
-      AdminStaff->>Billing: Generate invoice for patient
-      Billing->>Patient: Provide invoice details
-      Patient->>Billing: Make payment
-      Billing->>HMS: Update payment status
+      %% Relationships
+      Model <--> Controller : communicates
+      View <--> Controller : interacts
+      View --> Model : observes
   </div>
 </body>
 </html>
+
 
