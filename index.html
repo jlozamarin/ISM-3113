@@ -3,57 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Class Diagram</title>
+  <title>Use Case Diagram</title>
   <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
   <script>
     mermaid.initialize({ startOnLoad: true });
   </script>
 </head>
 <body>
-  <h1>Hospital Management System - Class Diagram</h1>
+  <h1>Hospital Management System - Use Case Diagram</h1>
   <div class="mermaid">
-    classDiagram
-      %% Define Classes
-      class Patient {
-        +PatientID: String
-        +Name: String
-        +Address: String
-        +PhoneNumber: String
-        +InsuranceInfo: String
-        +getMedicalHistory()
-        +updateDetails()
-      }
-      class Appointment {
-        +AppointmentID: String
-        +Date: Date
-        +Time: String
-        +DoctorAssigned: String
-        +scheduleAppointment()
-        +cancelAppointment()
-      }
-      class MedicalRecord {
-        +RecordID: String
-        +Diagnosis: String
-        +TreatmentPlan: String
-        +TestResults: String
-        +viewRecord()
-        +updateRecord()
-      }
-      class Billing {
-        +InvoiceID: String
-        +TotalAmount: Float
-        +PaymentStatus: String
-        +generateInvoice()
-        +processPayment()
-      }
+    graph TD
+      %% Stick Figures (Actors)
+      Doctors[🏥 Doctors]
+      Surgeons[👨‍⚕️ Surgeons]
+      Nurses[👩‍⚕️ Nurses]
+      AdminStaff[💻 Admin Staff]
+      Pharmacy[💊 Pharmacy Staff]
 
-      %% Define Relationships
-      Patient "1" --> "0..*" Appointment : "has"
-      Patient "1" --> "0..*" MedicalRecord : "has"
-      Appointment "1" --> "1" Billing : "linked to"
-      Appointment "1" --> "1" Patient : "for"
+      %% Use Cases
+      PatientRegistration[Patient Registration]
+      AppointmentScheduling[Appointment Scheduling]
+      AccessEHR[Access EHR]
+      Billing[Billing and Invoice Generation]
+      InventoryManagement[Inventory Management]
+
+      %% Hospital Management System
+      HMS[Hospital Management System]
+
+      %% Connections Between Actors and Use Cases
+      Doctors --> AccessEHR
+      Surgeons --> AccessEHR
+      Nurses --> AppointmentScheduling
+      AdminStaff --> PatientRegistration
+      AdminStaff --> AppointmentScheduling
+      AdminStaff --> Billing
+      Pharmacy --> InventoryManagement
+
+      %% Connections Between Use Cases and HMS
+      PatientRegistration --> HMS
+      AppointmentScheduling --> HMS
+      AccessEHR --> HMS
+      Billing --> HMS
+      InventoryManagement --> HMS
   </div>
 </body>
 </html>
-
-
